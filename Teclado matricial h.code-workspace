@@ -1,0 +1,30 @@
+{
+	"folders": [
+		{
+			"name": "actividad codificador",
+			"path": "../Documents/PlatformIO/Projects/actividad codificador"
+		},
+		{
+			"name": "5-7-23",
+			"path": "../5-7-23"
+		},
+		{
+			"name": "activ lib",
+			"path": "../Documents/PlatformIO/Projects/activ lib"
+		},
+		{
+			"name": "pantalla lcd",
+			"path": "../Documents/PlatformIO/Projects/pantalla lcd"
+		},
+		{
+			"name": "TecladosMatriciales",
+			"path": "../Documents/PlatformIO/Projects/TecladosMatriciales"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"mbed.h": "c",
+			"LCD.C": "cpp"
+		}
+	}
+}
