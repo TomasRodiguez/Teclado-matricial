@@ -1,30 +1,53 @@
-{
-	"folders": [
-		{
-			"name": "actividad codificador",
-			"path": "../Documents/PlatformIO/Projects/actividad codificador"
-		},
-		{
-			"name": "5-7-23",
-			"path": "../5-7-23"
-		},
-		{
-			"name": "activ lib",
-			"path": "../Documents/PlatformIO/Projects/activ lib"
-		},
-		{
-			"name": "pantalla lcd",
-			"path": "../Documents/PlatformIO/Projects/pantalla lcd"
-		},
-		{
-			"name": "TecladosMatriciales",
-			"path": "../Documents/PlatformIO/Projects/TecladosMatriciales"
-		}
-	],
-	"settings": {
-		"files.associations": {
-			"mbed.h": "c",
-			"LCD.C": "cpp"
-		}
-	}
+#include "MKL25Z"
+#include "mat_h"
+
+#define F1 11;
+#define F2 10;
+#define F3 6;
+#define F4 5;
+#define C1 4;
+#define C2 3;
+#define C3 0;
+#define C4 7;
+
+filas[4] = {11, 10, 6, 5};
+columnas[4] = {4; 3; 0; 7};
+
+   char keys[X][Y] = {
+   { '1','2','3', 'A' },
+   { '4','5','6', 'B' },
+   { '7','8','9', 'C' },
+   { '#','0','*', 'D' }
+};
+
+void configuracion(){
+      SIM->SCGC5 |= SIM_SCGC5_PORTE_MASK;
+      PORTE -> PCR[F1]= PORT_PCR_MUX(0);
+      PORTE -> PCR[F2]= PORT_PCR_MUX(0);
+      PORTE -> PCR[F3]= PORT_PCR_MUX(0);
+      PORTE -> PCR[F4]= PORT_PCR_MUX(0);
+      PORTA -> PCR[C1]= PORT_PCR_MUX(1) |PORT_PCR_PE_MASK|PORT_PCR_PS_MASK;
+      PORTA -> PCR[C2]= PORT_PCR_MUX(1) |PORT_PCR_PE_MASK|PORT_PCR_PS_MASK;
+      PORTA -> PCR[C3]= PORT_PCR_MUX(1) |PORT_PCR_PE_MASK|PORT_PCR_PS_MASK;
+      PORTA -> PCR[C4]= PORT_PCR_MUX(1) |PORT_PCR_PE_MASK|PORT_PCR_PS_MASK;
+
+     PTE -> PSOR |=(1u << F1);
+     PTE -> PSOR |=(1u << F2);
+     PTE -> PSOR |=(1u << F3);
+     PTE -> PSOR |=(1u << F4);
+}
+
+char lectura(){
+     for(int f=0; f<4; f++){
+       PTE -> PSOR |= (fllas[f] << 1);
+         for(int c=0; c<4; c++){
+         int estadoC = PTE -> PDIR & (1 << columnas[c]);
+           if(estadoC == 0){
+            return keys[f][c];
+           }
+        PTE -> PSOR |= (filas[f] << 0);
+       }
+     }
+
+    
 }
